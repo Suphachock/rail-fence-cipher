@@ -27,5 +27,6 @@ def encoder():
     return render_template('index.html')
 
 
+# esan
 if __name__ == "__main__":
     app.run(debug=True)
