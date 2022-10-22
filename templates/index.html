@@ -5,48 +5,80 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script
+      src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
+      />
   </head>
-  <body align="center">
-    <h1>Rail Fence Encoder</h1>
-    <form id="form">
-      <textarea name="" id="textarea" cols="50" rows="5" required></textarea>
-      <br />
-      KEy
-      <input type="number" min="1" id="keys" required />
-      <button id="submit">
-        Submit
-        <i class="fa fa-spinner fa-spin" style="display: none" id="loader"></i>
-      </button>
-    </form>
-    <div id="output"></div>
-  </body>
-  <script>
-    $("#output").hide();
-    $(document).ready(function () {
-      $("#form").on("submit", function (e) {
-        $.ajax({
-          data: {
-            text: $("#textarea").val(),
-            keys: $("#keys").val(),
-          },
-          type: "POST",
-          url: "/submit",
-          beforeSend: function () {
-            $("#loader").show();
-          },
-        }).done(function (data) {
-          $("#loader").hide();
-          var tt = $("#textarea").val();
-          if (tt != "") $("#output").html(data).show();
-          // else $("#output").hide();
-        });
-        e.preventDefault();
-      });
-    });
-  </script>
-</html>
+
+  <body>
+
+
+    <div id='stars'></div>
+    <div id='stars2'></div>
+    <div id='stars3'></div>
+
+
+
+
+
+
+
+
+    <div id="container">
+      <span id="text1"></span>
+      <span id="text2"></span>
+    </div>
+
+    <svg id="filters">
+      <defs>
+        <filter id="threshold">
+          <feColorMatrix in="SourceGraphic" type="matrix" values="1 0 0 0 0
+            0 1 0 0 0
+            0 0 1 0 0
+            0 0 0 255 -140" />
+          </filter>
+        </defs>
+      </svg>
+
+      <br>
+      <br>
+      <br>
+      <center>
+
+
+        <form id="form">
+          <!-- <textarea class="input" id="textarea" rows="7" required>
+      </textarea> -->
+          <div class="input"
+            contentEditable="true" id="mytext"
+            data-placeholder="Add some
+            text
+            here">
+          </div>
+
+          <!-- <div class="input" ></div> -->
+          <br>
+          <br />
+          KEy
+          <input type="number" min="1" id="keys" required />
+          <button id="submit" onclick="getmytext_andpasstopy()">
+            Submit
+            <i class="fa fa-spinner fa-spin" style="display: none" id="loader"></i>
+          </button>
+        </form>
+        <div id="output"></div>
+
+      </center>
+    </body>
+
+    <script type=text/javascript src="{{url_for('static',
+      filename='javascript/script.js')}}"></script>
+    <link rel="stylesheet" type="text/css"
+      href="{{url_for('static',filename='styles/styles.css') }}">
+
+
+
+  </html>
