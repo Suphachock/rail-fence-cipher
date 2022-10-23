@@ -41,16 +41,27 @@ def encryptRailFence(text, key):
     return("" . join(result))
 
 
-@app.route('/submit/<string:mytext>/<string:mykey>', methods=['GET', 'POST'])
-def submit(mytext, mykey):
-    if request.method == "POST":
-        text = json.loads(mytext).strip()
-        keys = json.loads(mykey)
-        print(text, keys, "<----------------------")
+# @app.route('/submit/<string:mytext>/<string:mykey>', methods=['GET', 'POST'])
+# def submit(mytext, mykey):
+#     if request.method == "POST":
+#         text = json.loads(mytext).strip()
+#         keys = json.loads(mykey)
+#         print(text, keys, "<----------------------")
 
-        # text = request.form['text'].strip()
-        # text = "ggggggggggggg"
-        # keys = request.form['keys']
+#         # text = request.form['text'].strip()
+#         # text = "ggggggggggggg"
+#         # keys = request.form['keys']
+#         data = encryptRailFence(text, int(keys))
+#         print(data)
+#         return(data)
+    return render_template('index.html')
+
+
+@app.route('/submit', methods=['GET', 'POST'])
+def submit():
+    if request.method == "POST":
+        text = request.form['text'].strip()
+        keys = request.form['keys']
         data = encryptRailFence(text, int(keys))
         print(data)
         return(data)
