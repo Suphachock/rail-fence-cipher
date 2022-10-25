@@ -9,7 +9,7 @@ $(document).ready(function () {
   $("#form").on("submit", function (e) {
     $.ajax({
       data: {
-        text: $('#mytext').html(),
+        text: document.getElementById('mytext').textContent,
         keys: $("#keys").val(),
       },
       type: "POST",
@@ -30,14 +30,32 @@ $(document).ready(function () {
 
 // ------------------- get text
 
-// function getmytext_andpasstopy(){
-//   let mytext = document.getElementById('mytext').textContent;
-//   let mykey = document.getElementById('keys').value;
-//   console.log(mytext);
-//   const req =  new XMLHttpRequest()
-//   req.open('POST',`/submit/${JSON.stringify(mytext)}/${JSON.stringify(mykey)}`)
-//   req.send()
-// }
+var numInput;
+var number = 0;
+var numberInput = 0;
+
+$(".increment").on("click",function(){
+  numInput = $(this).parent(".buttons").siblings("input");
+  number = parseInt($(numInput).val());
+  if (isNaN(number)){
+    number = 0;
+  }
+  $(numInput).val(parseInt(number)+1);
+  numInput = null; number = 0; numInput = 0;
+});
+
+$(".decrement").on("click",function(){
+  numInput = $(this).parent(".buttons").siblings("input");
+  number = parseInt($(numInput).val());
+
+  if ( (isNaN(number) ) || (number < 0) ) {
+    number = 0;
+    $(numInput).val(number);
+  } else if ($(numInput).val() > 0) {
+    $(numInput).val(parseInt(number)-1);
+  }
+  numInput = null; number = 0; numInput = 0;
+});
 
 // --------------------
 
